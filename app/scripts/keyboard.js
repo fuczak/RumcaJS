@@ -52,9 +52,11 @@ angular.module('rumca-js')
       activeKeys: activeKeys,
       keydown: function (keyCode) {
         activeKeys.push(keyCode);
+        console.log(activeKeys);
       },
       keyup: function (keyCode) {
         activeKeys.splice(activeKeys.indexOf(keyCode), 1);
+        console.log(activeKeys);
       },
       frequencyFromNoteNumber: function (keyCode) {
         var note = keys[keyCode];

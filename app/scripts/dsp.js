@@ -1,10 +1,8 @@
 'use strict';
 
 angular.module('rumca-js')
-  .factory('DSP', function () {
+  .factory('DSP', function ($window) {
     return {
-      init: function () {
-
-      }
-    };
+      ctx: new $window.AudioContext()
+    }
   });
