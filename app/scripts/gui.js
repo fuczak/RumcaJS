@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('rumca-js')
-  .controller('GUI', function ($document, Keyboard, DSP) {
+  .controller('GUI', function ($scope, $document, Keyboard, DSP) {
     //Register keyboard event handlers
     $document.bind('keydown', function (e) {
       if (Keyboard.activeKeys.indexOf(e.keyCode) === -1) {
@@ -11,4 +11,6 @@ angular.module('rumca-js')
     $document.bind('keyup', function (e) {
       Keyboard.keyup(e.keyCode);
     });
+    //Get reference to AudioContext
+    $scope.ctx = DSP.ctx;
   });

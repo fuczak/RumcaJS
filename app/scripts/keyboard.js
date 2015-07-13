@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('rumca-js')
-  .factory('Keyboard', function() {
+  .factory('Keyboard', function(Voice) {
     var keys = new Array( 256 );
     //Lower row
     keys[16] = 41; // = F2
@@ -52,6 +52,7 @@ angular.module('rumca-js')
       activeKeys: activeKeys,
       keydown: function (keyCode) {
         activeKeys.push(keyCode);
+        new Voice(this.frequencyFromNoteNumber(keyCode));
         console.log(activeKeys);
       },
       keyup: function (keyCode) {
