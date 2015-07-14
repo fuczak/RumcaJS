@@ -15,8 +15,12 @@ angular.module('rumca-js')
 
     $scope.dsp = DSP;
 
-    $scope.$watch('dsp.osc.type', function (value) {
-      DSP.oscTypeUpdate(value);
+    $scope.$watch('dsp.osc1.type', function (value) {
+      DSP.setOsc1Type(value);
+    });
+
+    $scope.$watch('dsp.osc2.type', function (value) {
+      DSP.setOsc2Type(value);
     });
 
     $scope.$watch('dsp.filter.cutoff', function (value) {

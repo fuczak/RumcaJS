@@ -55,10 +55,17 @@ angular.module('rumca-js')
     			voices[keyCode] = null;
     		}
     	},
-      oscTypeUpdate: function (value) {
+      setOsc1Type: function (value) {
         voices.forEach(function (voice) {
           if (voice) {
-            voice.setOscType(value);
+            voice.setOsc1Type(value);
+          }
+        });
+      },
+      setOsc2Type: function (value) {
+        voices.forEach(function (voice) {
+          if (voice) {
+            voice.setOsc2Type(value);
           }
         });
       },

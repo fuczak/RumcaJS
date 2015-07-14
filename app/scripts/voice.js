@@ -25,8 +25,11 @@ angular.module('rumca-js')
       this.osc2.stop();
     };
 
-    Voice.prototype.setOscType = function (value) {
+    Voice.prototype.setOsc1Type = function (value) {
       this.osc1.type = value;
+    };
+
+    Voice.prototype.setOsc2Type = function (value) {
       this.osc2.type = value;
     };
 
