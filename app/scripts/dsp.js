@@ -33,10 +33,12 @@ angular.module('rumca-js')
     return {
     	ctx: ctx,
       osc1: {
-        type: 'sawtooth'
+        type: 'sawtooth',
+        octave: 0
       },
       osc2: {
-        type: 'sawtooth'
+        type: 'sawtooth',
+        octave: 0
       },
       filter: filter,
       filterLFO: filterLFO,
@@ -59,6 +61,20 @@ angular.module('rumca-js')
         voices.forEach(function (voice) {
           if (voice) {
             voice.setOsc1Type(value);
+          }
+        });
+      },
+      setOsc1Octave: function (value) {
+        voices.forEach(function (voice) {
+          if (voice) {
+            voice.setOsc1Octave(value);
+          }
+        });
+      },
+      setOsc2Octave: function (value) {
+        voices.forEach(function (voice) {
+          if (voice) {
+            voice.setOsc2Octave(value);
           }
         });
       },
