@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('rumca-js')
-  .factory('Keyboard', function(Voice) {
+  .factory('Keyboard', function(DSP) {
     var keys = new Array( 256 );
+    //Keycodes to notes table
     //Lower row
     keys[16] = 41; // = F2
     keys[65] = 42;
@@ -49,21 +50,24 @@ angular.module('rumca-js')
     var activeKeys = [];
 
     return {
-      activeKeys: activeKeys,
-      keydown: function (keyCode) {
-        activeKeys.push(keyCode);
-        new Voice(this.frequencyFromNoteNumber(keyCode));
-        console.log(activeKeys);
-      },
-      keyup: function (keyCode) {
-        activeKeys.splice(activeKeys.indexOf(keyCode), 1);
-        console.log(activeKeys);
-      },
-      frequencyFromNoteNumber: function (keyCode) {
-        var note = keys[keyCode];
-        if (note) {
-          return 440 * Math.pow(2,(note-69)/12);
+        activeKeys: activeKeys,
+        keydown: function (keyCode) {
+            activeKeys.push(keyCode);
+            var note = this.frequencyFromNoteNumber(keyCode);
+            if (note) {
+                DSP.noteOn(note);
+            }
+        },
+        keyup: function (keyCode) {
+            activeKeys.splice(activeKeys.indexOf(keyCode), 1);
+            var note = this.frequencyFromNoteNumber(keyCode);
+            if (note) {
+                DSP.noteOff(note);
+            }
+        },
+        frequencyFromNoteNumber: function (keyCode) {
+            var note = keys[keyCode];
+            return 440 * Math.pow(2,(note-69)/12);
         }
-      }
     };
   });
