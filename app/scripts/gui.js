@@ -19,4 +19,8 @@ angular.module('rumca-js')
       DSP.oscTypeUpdate(value);
     });
 
+    $scope.$watch('dsp.filter.cutoff', function (value) {
+      DSP.filterCutoffUpdate(value);
+    });
+
   });

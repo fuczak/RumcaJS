@@ -9,8 +9,18 @@ angular.module('rumca-js')
     var filter = ctx.createBiquadFilter();
     filter.type = 'lowpass';
     filter.Q.value = 7.0;
-    filter.frequency.value = 22050;
+    filter.cutoff = 14;
+    filter.frequency.value = Math.pow(2, filter.cutoff);
     filter.connect(ctx.destination);
+    //filter LFO mod gain
+    var filterLFOGain = ctx.createGain();
+    filterLFOGain.gain.value = 500;
+    filterLFOGain.connect(filter.frequency);
+    //filter LFO mod frequency
+    var filterLFO = ctx.createOscillator();
+    filterLFO.frequency.value = 4;
+    filterLFO.connect(filterLFOGain);
+    filterLFO.start();
 
     //init osc1 gain
     var osc1Gain = ctx.createGain();
@@ -23,12 +33,14 @@ angular.module('rumca-js')
     return {
     	ctx: ctx,
       osc1: {
-        type: 'sine'
+        type: 'sawtooth'
       },
       osc2: {
-        type: 'sine'
+        type: 'sawtooth'
       },
       filter: filter,
+      filterLFO: filterLFO,
+      filterLFOGain: filterLFOGain,
       osc1Gain: osc1Gain,
       osc2Gain: osc2Gain,
     	noteOn: function(note, keyCode) {
@@ -49,6 +61,9 @@ angular.module('rumca-js')
             voice.setOscType(value);
           }
         });
+      },
+      filterCutoffUpdate: function (value) {
+        filter.frequency.value = Math.pow(2, value);
       }
     };
   });
