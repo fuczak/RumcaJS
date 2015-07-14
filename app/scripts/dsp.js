@@ -7,17 +7,27 @@ angular.module('rumca-js')
 
     return {
     	ctx: ctx,
-    	noteOn: function(note) {
-    		if (voices[note] == null) {
+      osc: {
+        type: 'sine'
+      },
+    	noteOn: function(note, keyCode) {
+    		if (!voices[keyCode]) {
     			//Create new voice and store it in voices array
-    			voices[note] = new Voice(note, ctx);
+    			voices[keyCode] = new Voice(note, this);
     		}
     	},
-    	noteOff: function(note) {
-    		if (voices[note] != null) {
-    			voices[note].noteOff();
-    			voices[note] = null;
+    	noteOff: function(note, keyCode) {
+    		if (voices[keyCode]) {
+    			voices[keyCode].noteOff();
+    			voices[keyCode] = null;
     		}
-    	}
+    	},
+      oscTypeUpdate: function (value) {
+        voices.forEach(function (voice) {
+          if (voice) {
+            voice.setOscType(value);
+          }
+        });
+      }
     };
   });

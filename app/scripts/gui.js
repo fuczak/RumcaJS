@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('rumca-js')
-  .controller('GUI', function ($scope, $document, Keyboard) {
+  .controller('GUI', function ($scope, $document, Keyboard, DSP) {
     //Register keyboard event handlers
     $document.bind('keydown', function (e) {
       //Prevent invoking function multiple times when key is being hold down
@@ -12,4 +12,11 @@ angular.module('rumca-js')
     $document.bind('keyup', function (e) {
       Keyboard.keyup(e.keyCode);
     });
+
+    $scope.dsp = DSP;
+
+    $scope.$watch('dsp.osc.type', function (value) {
+      DSP.oscTypeUpdate(value);
+    });
+
   });

@@ -1,4 +1,4 @@
 'use strict';
 
 angular
-  .module('rumca-js', []);
+  .module('rumca-js', ['ui.bootstrap']);

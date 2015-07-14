@@ -55,14 +55,14 @@ angular.module('rumca-js')
             activeKeys.push(keyCode);
             var note = this.frequencyFromNoteNumber(keyCode);
             if (note) {
-                DSP.noteOn(note);
+                DSP.noteOn(note, keyCode);
             }
         },
         keyup: function (keyCode) {
             activeKeys.splice(activeKeys.indexOf(keyCode), 1);
             var note = this.frequencyFromNoteNumber(keyCode);
             if (note) {
-                DSP.noteOff(note);
+                DSP.noteOff(note, keyCode);
             }
         },
         frequencyFromNoteNumber: function (keyCode) {

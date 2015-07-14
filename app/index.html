@@ -20,8 +20,13 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <h1>Test</h1>
-    {{test}}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div ng-include="'views/osc.html'"></div>
+        </div>
+      </div>
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -39,6 +44,7 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
