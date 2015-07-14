@@ -3,6 +3,13 @@
     <h3 class="panel-title">Filter</h3>
   </div>
   <div class="panel-body">
+    <label>Filter type</label>
+    <div class="btn-group">
+       <label class="btn btn-primary" ng-model="dsp.filter.type" btn-radio="'lowpass'">LP</label>
+       <label class="btn btn-primary" ng-model="dsp.filter.type" btn-radio="'highpass'">HP</label>
+       <label class="btn btn-primary" ng-model="dsp.filter.type" btn-radio="'bandpass'">BP</label>
+   </div>
+   <hr>
     <label>Filter Freq</label><span class="text-small"> - {{dsp.filter.frequency.value | number:0}} Hz</span>
     <input type="range" ng-model="dsp.filter.cutoff" min="0" max="15" step="0.1">
     <label>Filter Q</label><span class="text-small"> - {{dsp.filter.Q.value | number:1}} dB</span>
