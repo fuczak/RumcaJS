@@ -31,6 +31,14 @@ angular.module('rumca-js')
       DSP.setOsc2Octave(value);
     });
 
+    $scope.$watch('dsp.osc1.detune.value', function (value) {
+      DSP.setOsc1Detune(value);
+    });
+
+    $scope.$watch('dsp.osc2.detune.value', function (value) {
+      DSP.setOsc2Detune(value);
+    });
+
     $scope.$watch('dsp.filter.cutoff', function (value) {
       DSP.filterCutoffUpdate(value);
     });

@@ -11,8 +11,8 @@
       <label class="btn btn-primary" ng-model="dsp.osc1.type" btn-radio="'triangle'">Triangle</label>
     </div>
     <hr>
-    <label>Detune</label>
-    <input type="range" min="-12" max="12" ng-model="dsp.osc1detune">
+    <label>Detune</label><span class="text-small"> {{dsp.osc1.detune.value}} cents</span>
+    <input type="range" min="-12" max="12" ng-model="dsp.osc1.detune.value">
     <hr>
     <label>Octave</label>
     <br>
@@ -36,8 +36,8 @@
       <label class="btn btn-primary" ng-model="dsp.osc2.type" btn-radio="'triangle'">Triangle</label>
     </div>
     <hr>
-    <label>Detune</label>
-    <input type="range" min="-12" max="12" ng-model="dsp.osc2detune">
+    <label>Detune</label><span class="text-small"> {{dsp.osc2.detune.value}} cents</span>
+    <input type="range" min="-12" max="12" ng-model="dsp.osc2.detune.value">
     <hr>
     <label>Octave</label>
     <br>

@@ -34,11 +34,17 @@ angular.module('rumca-js')
     	ctx: ctx,
       osc1: {
         type: 'sawtooth',
-        octave: 0
+        octave: 0,
+        detune: {
+          value: 0
+        }
       },
       osc2: {
         type: 'sawtooth',
-        octave: 0
+        octave: 0,
+        detune: {
+          value: 0
+        }
       },
       filter: filter,
       filterLFO: filterLFO,
@@ -71,13 +77,6 @@ angular.module('rumca-js')
           }
         });
       },
-      setOsc2Octave: function (value) {
-        voices.forEach(function (voice) {
-          if (voice) {
-            voice.setOsc2Octave(value);
-          }
-        });
-      },
       setOsc2Type: function (value) {
         voices.forEach(function (voice) {
           if (voice) {
@@ -85,8 +84,29 @@ angular.module('rumca-js')
           }
         });
       },
+      setOsc2Octave: function (value) {
+        voices.forEach(function (voice) {
+          if (voice) {
+            voice.setOsc2Octave(value);
+          }
+        });
+      },
+      setOsc1Detune: function (value) {
+        voices.forEach(function (voice) {
+          if (voice) {
+            voice.setOsc1Detune(value);
+          }
+        });
+      },
+      setOsc2Detune: function (value) {
+        voices.forEach(function (voice) {
+          if (voice) {
+            voice.setOsc2Detune(value);
+          }
+        });
+      },
       filterCutoffUpdate: function (value) {
-        filter.frequency.value = Math.pow(2, value);
+        filter.frequency.value = Math.pow(1.95, value);
       }
     };
   });
