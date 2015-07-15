@@ -16,7 +16,7 @@ angular.module('rumca-js')
     //Init patch for Filter Envelope
     var filterEnv = {
       attack: 0.1,
-      decay: 0.3,
+      decay: 0.6,
       sustain: 0.7,
       release: 2
     };
@@ -27,8 +27,8 @@ angular.module('rumca-js')
       Q: {
         value: 7
       },
-      cutoff: 14,
-      modEnv: 0
+      cutoff: 9,
+      modEnv: 50
     };
 
     var filterLFOGain = {
@@ -53,15 +53,17 @@ angular.module('rumca-js')
 
     var osc2 = {
       type: 'triangle',
-      octave: 1,
+      octave: -1,
       detune: {
         value: 0
       }
     };
 
+    var oscMix = 50;
+
     //init Master Gain
     var master = ctx.createGain();
-    master.gain.value = 0.1;
+    master.gain.value = 0.01;
     master.connect(ctx.destination);
 
     // function updateVoices(fn, value) {
@@ -80,6 +82,7 @@ angular.module('rumca-js')
       filterLFOGain: filterLFOGain,
       filterEnv: filterEnv,
       master: master,
+      oscMix: oscMix,
     	noteOn: function(note, keyCode) {
     		if (!voices[keyCode]) {
     			//Create new voice and store it in voices array
@@ -132,6 +135,13 @@ angular.module('rumca-js')
         voices.forEach(function (voice) {
           if (voice) {
             voice.setOsc2Detune(value);
+          }
+        });
+      },
+      setOscMix: function (value) {
+        voices.forEach(function (voice) {
+          if (voice) {
+            voice.setOscMix(value);
           }
         });
       },

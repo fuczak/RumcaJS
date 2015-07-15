@@ -30,7 +30,7 @@ angular.module('rumca-js')
       this.filterLFO.connect(this.filterLFOGain);
       this.filterLFO.start(now);
 
-      //create volume envelope
+      //Volume Envelope
       this.volEnv = dsp.ctx.createGain();
       this.volEnv.gain.cancelScheduledValues(now);
       this.volEnv.gain.setValueAtTime(0, now);
@@ -38,22 +38,29 @@ angular.module('rumca-js')
       this.volEnv.gain.setTargetAtTime(Number(dsp.volEnv.sustain), now + Number(dsp.volEnv.attack), Number(dsp.volEnv.decay) + 0.001);
       this.volEnv.connect(this.filter);
 
-      //create oscillator 1
+      //Oscillator 1
       this.osc1 = dsp.ctx.createOscillator();
       this.note = note;
       this.osc1.frequency.value = note * Math.pow(2, dsp.osc1.octave);
       this.osc1.detune.value = dsp.osc1.detune.value;
       this.osc1.type = dsp.osc1.type;
-      this.osc1.connect(this.volEnv);
-      this.osc1.start();
+      this.osc1.gain = dsp.ctx.createGain();
+      this.osc1.gain.gain.value = 1 - (Number(dsp.oscMix) / 100);
+      this.osc1.connect(this.osc1.gain);
+      this.osc1.gain.connect(this.volEnv);
+      this.osc1.start(now);
 
-      //create oscillator 2
+      //Oscillator 2
       this.osc2 = dsp.ctx.createOscillator();
       this.note = note;
-      this.osc2.frequency.value = note;
+      this.osc2.frequency.value = note * Math.pow(2, dsp.osc2.octave);
+      this.osc2.detune.value = dsp.osc2.detune.value;
       this.osc2.type = dsp.osc2.type;
-      this.osc2.connect(this.volEnv);
-      this.osc2.start();
+      this.osc2.gain = dsp.ctx.createGain();
+      this.osc2.gain.gain.value = 1 - this.osc1.gain.gain.value;
+      this.osc2.connect(this.osc2.gain);
+      this.osc2.gain.connect(this.volEnv);
+      this.osc2.start(now);
 
     };
 
@@ -93,6 +100,11 @@ angular.module('rumca-js')
       this.osc2.detune.value = value;
     };
 
+    Voice.prototype.setOscMix = function (value) {
+      this.osc1.gain.gain.value = 1 - (value/100);
+      this.osc2.gain.gain.value = 1 - this.osc1.gain.gain.value;
+    }
+
     Voice.prototype.setFilterType = function (value) {
       this.filter.type = value;
     };
@@ -112,6 +124,5 @@ angular.module('rumca-js')
     Voice.prototype.setFilterLFOGain = function (value) {
       this.filterLFOGain.gain.value = value;
     };
-
     return Voice;
   });

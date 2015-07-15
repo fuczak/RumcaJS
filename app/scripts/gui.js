@@ -12,8 +12,10 @@ angular.module('rumca-js')
     $document.bind('keyup', function (e) {
       Keyboard.keyup(e.keyCode);
     });
+
     //Reference DSP object in synth gui
     $scope.dsp = DSP;
+
     //Register watchers for not-straightforward connections between DSP and gui controls
     $scope.$watch('dsp.osc1.type', function (value) {
       DSP.setOsc1Type(value);
@@ -39,6 +41,10 @@ angular.module('rumca-js')
       DSP.setOsc2Detune(value);
     });
 
+    $scope.$watch('dsp.oscMix', function (value) {
+      DSP.setOscMix(value);
+    });
+
     $scope.$watch('dsp.filter.type', function (value) {
       DSP.setFilterType(value);
     });
@@ -54,7 +60,7 @@ angular.module('rumca-js')
     $scope.$watch('dsp.filterLFO.frequency.value', function (value) {
       DSP.setFilterLFOFreq(value);
     });
-    //
+
     $scope.$watch('dsp.filterLFOGain.gain.value', function (value) {
       DSP.setFilterLFOGain(value);
     });
