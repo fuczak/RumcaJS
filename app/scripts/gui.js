@@ -65,4 +65,8 @@ angular.module('rumca-js')
       DSP.setFilterLFOGain(value);
     });
 
+    $scope.$watch('dsp.distortion.amount', function (value) {
+      DSP.distortion.updateCurve(value);
+    });
+
   });
