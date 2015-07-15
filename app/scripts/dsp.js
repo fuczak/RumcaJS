@@ -5,6 +5,13 @@ angular.module('rumca-js')
   	var ctx = new $window.AudioContext();
   	var voices = [];
 
+    var volEnv = {
+      attack: 0.1,
+      decay: 0.3,
+      sustain: 0.7,
+      release: 2
+    };
+
     //init filter
     var filter = ctx.createBiquadFilter();
     filter.type = 'lowpass';
@@ -14,21 +21,18 @@ angular.module('rumca-js')
     filter.connect(ctx.destination);
     //filter LFO mod gain
     var filterLFOGain = ctx.createGain();
-    filterLFOGain.gain.value = 500;
+    filterLFOGain.gain.value = 0;
     filterLFOGain.connect(filter.frequency);
     //filter LFO mod frequency
     var filterLFO = ctx.createOscillator();
-    filterLFO.frequency.value = 4;
+    filterLFO.frequency.value = 0;
     filterLFO.connect(filterLFOGain);
     filterLFO.start();
 
     //init osc1 gain
-    var osc1Gain = ctx.createGain();
-    osc1Gain.connect(filter);
-
-    //inti osc2 gain
-    var osc2Gain = ctx.createGain();
-    osc2Gain.connect(filter);
+    var oscGain = ctx.createGain();
+    oscGain.gain.value = 0.1;
+    oscGain.connect(filter);
 
     return {
     	ctx: ctx,
@@ -46,11 +50,11 @@ angular.module('rumca-js')
           value: 0
         }
       },
+      volEnv: volEnv,
       filter: filter,
       filterLFO: filterLFO,
       filterLFOGain: filterLFOGain,
-      osc1Gain: osc1Gain,
-      osc2Gain: osc2Gain,
+      oscGain: oscGain,
     	noteOn: function(note, keyCode) {
     		if (!voices[keyCode]) {
     			//Create new voice and store it in voices array
@@ -59,7 +63,7 @@ angular.module('rumca-js')
     	},
     	noteOff: function(note, keyCode) {
     		if (voices[keyCode]) {
-    			voices[keyCode].noteOff();
+    			voices[keyCode].noteOff(this);
     			voices[keyCode] = null;
     		}
     	},
