@@ -7,12 +7,20 @@ angular.module('rumca-js')
 
       var now = dsp.ctx.currentTime;
 
+      //Volume Envelope
+      this.volEnv = dsp.ctx.createGain();
+      this.volEnv.gain.cancelScheduledValues(now);
+      this.volEnv.gain.setValueAtTime(0, now);
+      this.volEnv.gain.linearRampToValueAtTime(1, now + Number(dsp.volEnv.attack));
+      this.volEnv.gain.setTargetAtTime(Number(dsp.volEnv.sustain), now + Number(dsp.volEnv.attack), Number(dsp.volEnv.decay) + 0.001);
+      this.volEnv.connect(dsp.master);
+
       //Filter
       this.filter = dsp.ctx.createBiquadFilter();
       this.filter.type = dsp.filter.type;
       this.filter.Q.value = dsp.filter.Q.value;
       this.filter.frequency.value = Math.pow(2, dsp.filter.cutoff);
-      this.filter.connect(dsp.master);
+      this.filter.connect(this.volEnv);
 
       //Filter Envelope
       this.filter.attackLevel = dsp.filter.modEnv * 72;
@@ -30,14 +38,6 @@ angular.module('rumca-js')
       this.filterLFO.connect(this.filterLFOGain);
       this.filterLFO.start(now);
 
-      //Volume Envelope
-      this.volEnv = dsp.ctx.createGain();
-      this.volEnv.gain.cancelScheduledValues(now);
-      this.volEnv.gain.setValueAtTime(0, now);
-      this.volEnv.gain.linearRampToValueAtTime(1, now + Number(dsp.volEnv.attack));
-      this.volEnv.gain.setTargetAtTime(Number(dsp.volEnv.sustain), now + Number(dsp.volEnv.attack), Number(dsp.volEnv.decay) + 0.001);
-      this.volEnv.connect(this.filter);
-
       //Oscillator 1
       this.osc1 = dsp.ctx.createOscillator();
       this.note = note;
@@ -47,7 +47,7 @@ angular.module('rumca-js')
       this.osc1.gain = dsp.ctx.createGain();
       this.osc1.gain.gain.value = 1 - (Number(dsp.oscMix) / 100);
       this.osc1.connect(this.osc1.gain);
-      this.osc1.gain.connect(this.volEnv);
+      this.osc1.gain.connect(this.filter);
       this.osc1.start(now);
 
       //Oscillator 2
@@ -59,7 +59,7 @@ angular.module('rumca-js')
       this.osc2.gain = dsp.ctx.createGain();
       this.osc2.gain.gain.value = 1 - this.osc1.gain.gain.value;
       this.osc2.connect(this.osc2.gain);
-      this.osc2.gain.connect(this.volEnv);
+      this.osc2.gain.connect(this.filter);
       this.osc2.start(now);
 
     };
@@ -103,7 +103,7 @@ angular.module('rumca-js')
     Voice.prototype.setOscMix = function (value) {
       this.osc1.gain.gain.value = 1 - (value/100);
       this.osc2.gain.gain.value = 1 - this.osc1.gain.gain.value;
-    }
+    };
 
     Voice.prototype.setFilterType = function (value) {
       this.filter.type = value;
