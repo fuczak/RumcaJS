@@ -39,8 +39,24 @@ angular.module('rumca-js')
       DSP.setOsc2Detune(value);
     });
 
+    $scope.$watch('dsp.filter.type', function (value) {
+      DSP.setFilterType(value);
+    });
+
     $scope.$watch('dsp.filter.cutoff', function (value) {
-      DSP.filterCutoffUpdate(value);
+      DSP.setFilterCutoff(value);
+    });
+
+    $scope.$watch('dsp.filter.Q.value', function (value) {
+      DSP.setFilterQ(value);
+    });
+
+    $scope.$watch('dsp.filterLFO.frequency.value', function (value) {
+      DSP.setFilterLFOFreq(value);
+    });
+    //
+    $scope.$watch('dsp.filterLFOGain.gain.value', function (value) {
+      DSP.setFilterLFOGain(value);
     });
 
   });

@@ -5,14 +5,31 @@ angular.module('rumca-js')
 
     var Voice = function (note, dsp) {
 
-      //create volume envelope
       var now = dsp.ctx.currentTime;
+
+      //Create Filter
+      this.filter = dsp.ctx.createBiquadFilter();
+      this.filter.type = dsp.filter.type;
+      this.filter.Q.value = dsp.filter.Q.value;
+      this.filter.frequency.value = Math.pow(2, dsp.filter.cutoff);
+      this.filter.connect(dsp.oscGain);
+
+      //Create Filter LFO
+      this.filterLFOGain = dsp.ctx.createGain();
+      this.filterLFOGain.gain.value = dsp.filterLFOGain.gain.value;
+      this.filterLFOGain.connect(this.filter.frequency);
+      this.filterLFO = dsp.ctx.createOscillator();
+      this.filterLFO.frequency.value = dsp.filterLFO.frequency.value;
+      this.filterLFO.connect(this.filterLFOGain);
+      this.filterLFO.start(now);
+
+      //create volume envelope
       this.volEnv = dsp.ctx.createGain();
       this.volEnv.gain.cancelScheduledValues(now);
       this.volEnv.gain.setValueAtTime(0, now);
       this.volEnv.gain.linearRampToValueAtTime(1, now + Number(dsp.volEnv.attack));
       this.volEnv.gain.setTargetAtTime(Number(dsp.volEnv.sustain), now, Number(dsp.volEnv.decay) + 0.001);
-      this.volEnv.connect(dsp.oscGain);
+      this.volEnv.connect(this.filter);
 
       //create oscillator 1
       this.osc1 = dsp.ctx.createOscillator();
@@ -65,6 +82,27 @@ angular.module('rumca-js')
 
     Voice.prototype.setOsc2Detune = function (value) {
       this.osc2.detune.value = value;
+    };
+
+    Voice.prototype.setFilterType = function (value) {
+      this.filter.type = value;
+    };
+
+    Voice.prototype.setFilterFreq = function (value) {
+      console.log(value);
+      this.filter.frequency.value = Math.pow(2, value);
+    };
+
+    Voice.prototype.setFilterQ = function (value) {
+      this.filter.Q.value = value;
+    };
+
+    Voice.prototype.setFilterLFOFreq = function (value) {
+      this.filterLFO.frequency.value = value;
+    };
+
+    Voice.prototype.setFilterLFOGain = function (value) {
+      this.filterLFOGain.gain.value = value;
     };
 
     return Voice;

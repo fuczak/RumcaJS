@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Oscillator 1</h3>
+  </div>
+  <div class="panel-body text-center">
+    <label>Waveform</label>
+    <div class="btn-group btn-group-justified">
+      <label class="btn btn-primary" ng-model="dsp.osc1.type" btn-radio="'sine'">Sine</label>
+      <label class="btn btn-primary" ng-model="dsp.osc1.type" btn-radio="'square'">Square</label>
+      <label class="btn btn-primary" ng-model="dsp.osc1.type" btn-radio="'sawtooth'">Saw</label>
+      <label class="btn btn-primary" ng-model="dsp.osc1.type" btn-radio="'triangle'">Triangle</label>
+    </div>
+    <hr>
+    <label>Detune</label><span class="text-small"> {{dsp.osc1.detune.value}} cents</span>
+    <input type="range" min="-12" max="12" ng-model="dsp.osc1.detune.value">
+    <hr>
+    <label>Octave</label>
+    <br>
+    <div class="btn-group btn-group-justified">
+      <label class="btn btn-primary" ng-model="dsp.osc1.octave" btn-radio="-1">-1</label>
+      <label class="btn btn-primary" ng-model="dsp.osc1.octave" btn-radio="0">0</label>
+      <label class="btn btn-primary" ng-model="dsp.osc1.octave" btn-radio="1">+1</label>
+    </div>
+  </div>
+</div>
