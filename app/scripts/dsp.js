@@ -27,7 +27,8 @@ angular.module('rumca-js')
       Q: {
         value: 7
       },
-      cutoff: 14
+      cutoff: 14,
+      modEnv: 0
     };
 
     var filterLFOGain = {
@@ -58,16 +59,16 @@ angular.module('rumca-js')
       }
     };
 
-    //init osc1 gain
-    var oscGain = ctx.createGain();
-    oscGain.gain.value = 0.1;
-    oscGain.connect(ctx.destination);
+    //init Master Gain
+    var master = ctx.createGain();
+    master.gain.value = 0.1;
+    master.connect(ctx.destination);
 
-    function updateVoices(fn, value) {
-        voices.forEach(function (voice) {
-          fn.call(voice, value);
-        });
-    };
+    // function updateVoices(fn, value) {
+    //     voices.forEach(function (voice) {
+    //       fn.call(voice, value);
+    //     });
+    // };
 
     return {
     	ctx: ctx,
@@ -78,7 +79,7 @@ angular.module('rumca-js')
       filterLFO: filterLFO,
       filterLFOGain: filterLFOGain,
       filterEnv: filterEnv,
-      oscGain: oscGain,
+      master: master,
     	noteOn: function(note, keyCode) {
     		if (!voices[keyCode]) {
     			//Create new voice and store it in voices array
@@ -165,7 +166,7 @@ angular.module('rumca-js')
       setFilterLFOGain: function (value) {
         voices.forEach(function (voice) {
           if (voice) {
-            voice.setFilterLFOGain(value)
+            voice.setFilterLFOGain(value);
           }
         });
       }

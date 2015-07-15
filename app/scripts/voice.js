@@ -7,12 +7,19 @@ angular.module('rumca-js')
 
       var now = dsp.ctx.currentTime;
 
-      //Create Filter
+      //Filter
       this.filter = dsp.ctx.createBiquadFilter();
       this.filter.type = dsp.filter.type;
       this.filter.Q.value = dsp.filter.Q.value;
       this.filter.frequency.value = Math.pow(2, dsp.filter.cutoff);
-      this.filter.connect(dsp.oscGain);
+      this.filter.connect(dsp.master);
+
+      //Filter Envelope
+      this.filter.attackLevel = dsp.filter.modEnv * 72;
+      this.filter.sustainLevel = this.filter.attackLevel * dsp.filterEnv.sustain;
+      this.filter.detune.setValueAtTime(0, now);
+      this.filter.detune.linearRampToValueAtTime(this.filter.attackLevel, now + Number(dsp.filterEnv.attack));
+      this.filter.detune.setTargetAtTime(this.filter.sustainLevel, now + Number(dsp.filterEnv.attack), Number(dsp.filterEnv.decay));
 
       //Create Filter LFO
       this.filterLFOGain = dsp.ctx.createGain();
@@ -28,7 +35,7 @@ angular.module('rumca-js')
       this.volEnv.gain.cancelScheduledValues(now);
       this.volEnv.gain.setValueAtTime(0, now);
       this.volEnv.gain.linearRampToValueAtTime(1, now + Number(dsp.volEnv.attack));
-      this.volEnv.gain.setTargetAtTime(Number(dsp.volEnv.sustain), now, Number(dsp.volEnv.decay) + 0.001);
+      this.volEnv.gain.setTargetAtTime(Number(dsp.volEnv.sustain), now + Number(dsp.volEnv.attack), Number(dsp.volEnv.decay) + 0.001);
       this.volEnv.connect(this.filter);
 
       //create oscillator 1
@@ -56,6 +63,8 @@ angular.module('rumca-js')
       this.volEnv.gain.cancelScheduledValues(now);
       this.volEnv.gain.setValueAtTime(this.volEnv.gain.value, now);
       this.volEnv.gain.setTargetAtTime(0, now, Number(dsp.volEnv.release)/10);
+      this.filter.detune.cancelScheduledValues(now);
+      this.filter.detune.setTargetAtTime(0, now, Number(dsp.filterEnv.release)/10);
     	this.osc1.stop(release);
       this.osc2.stop(release);
     };
@@ -89,7 +98,6 @@ angular.module('rumca-js')
     };
 
     Voice.prototype.setFilterFreq = function (value) {
-      console.log(value);
       this.filter.frequency.value = Math.pow(2, value);
     };
 
