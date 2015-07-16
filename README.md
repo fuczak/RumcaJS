@@ -4,7 +4,7 @@ AngularJS Polyphonic Synthesizer based on Web Audio API.
 
 ## Live demo
 
-Chech out http://fuczak.github.io/RumcaJS
+Check out the website: http://fuczak.github.io/RumcaJS
 
 ## Build & development
 
