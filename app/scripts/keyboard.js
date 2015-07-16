@@ -5,47 +5,44 @@ angular.module('rumca-js')
     var keys = new Array( 256 );
     //Keycodes to notes table
     //Lower row
-    keys[16] = 41; // = F2
-    keys[65] = 42;
-    keys[90] = 43;
-    keys[83] = 44;
-    keys[88] = 45;
-    keys[68] = 46;
-    keys[67] = 47;
-    keys[86] = 48; // = C3
-    keys[71] = 49;
-    keys[66] = 50;
-    keys[72] = 51;
-    keys[78] = 52;
-    keys[77] = 53; // = F3
-    keys[75] = 54;
-    keys[188] = 55;
-    keys[76] = 56;
-    keys[190] = 57;
-    keys[186] = 58;
-    keys[191] = 59;
+    keys[90] = 31; // C2
+    keys[83] = 32;
+    keys[88] = 33;
+    keys[68] = 34;
+    keys[67] = 35;
+    keys[86] = 36;
+    keys[71] = 37;
+    keys[66] = 38;
+    keys[72] = 39;
+    keys[78] = 40;
+    keys[74] = 41;
+    keys[77] = 42;
+    keys[188] = 43;
+    keys[76] = 44;
+    keys[190] = 45;
+    keys[186] = 46;
+    keys[191] = 47;
     // Upper row
-    keys[81] = 60; // = C4 ("middle C")
-    keys[50] = 61;
-    keys[87] = 62;
-    keys[51] = 63;
-    keys[69] = 64;
-    keys[82] = 65; // = F4
-    keys[53] = 66;
-    keys[84] = 67;
-    keys[54] = 68;
-    keys[89] = 69;
-    keys[55] = 70;
-    keys[85] = 71;
-    keys[73] = 72; // = C5
-    keys[57] = 73;
-    keys[79] = 74;
-    keys[48] = 75;
-    keys[80] = 76;
-    keys[219] = 77; // = F5
-    keys[187] = 78;
-    keys[221] = 79;
-    keys[220] = 80;
+    keys[81] = 48;
+    keys[50] = 49;
+    keys[87] = 50;
+    keys[51] = 51;
+    keys[69] = 52;
+    keys[52] = 53;
+    keys[82] = 54;
+    keys[84] = 55;
+    keys[54] = 56;
+    keys[89] = 57;
+    keys[55] = 58;
+    keys[85] = 59;
+    keys[73] = 60;
+    keys[57] = 61;
+    keys[79] = 62;
+    keys[48] = 63;
+    keys[80] = 64;
+    keys[189] = 65;
+    keys[219] = 66;
+    keys[187] = 67;
 
     var activeKeys = [];
 
