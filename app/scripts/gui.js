@@ -2,17 +2,25 @@
 
 angular.module('rumca-js')
   .controller('GUI', function ($scope, $document, Keyboard, DSP) {
+    
     //Register keyboard event handlers
     $document.bind('keydown', function (e) {
       //Prevent invoking function multiple times when key is being hold down
       if (Keyboard.activeKeys.indexOf(e.keyCode) === -1) {
-        Keyboard.keydown(e.keyCode);
+        //Using scope apply to enable ng-class statement on keyboard keys
+        $scope.$apply(function() {
+          Keyboard.keydown(e.keyCode);
+        });
       }
     });
     $document.bind('keyup', function (e) {
-      Keyboard.keyup(e.keyCode);
+      $scope.$apply(function() {
+        Keyboard.keyup(e.keyCode);
+      });
     });
 
+    //Reference Keyboard object in synth gui
+    $scope.keyboard = Keyboard;
     //Reference DSP object in synth gui
     $scope.dsp = DSP;
 
