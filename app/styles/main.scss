@@ -53,15 +53,9 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   position:relative;
   z-index:1;
   background:#f5f5f5;
-}
-.whiteActive {
-  box-shadow:-1px 0 15px rgba(0, 0, 0, .7) inset;
-  -webkit-box-shadow:-1px 0 15px rgba(0, 0, 0, .7) inset;
-  -moz-box-shadow:-1px 0 15px rgba(0, 0, 0, .7) inset;
-  -ms-box-shadow:-1px 0 15px rgba(0, 0, 0, .7) inset;
-}
-.white:active  #goat{
-  background-image:url(../img/Goat.gif);
+  &.active {
+  	box-shadow:-1px 0 15px rgba(0, 0, 0, .7) inset;
+  }
 }
 .black {
   position:absolute;
@@ -71,13 +65,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   background:#000;
   right:-35%;
   box-shadow: 1px 0 #111, 0 2px 0 #111, 0 3px 0 #333, 0 4px 0 #333, 0 5px 0 #333, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px rgba(0, 0, 0, .15);
-  -webkit-box-shadow: 1px 0 #777, 0 2px 0 #777, 0 3px 0 #666, 0 4px 0 #555, 0 5px 0 #444, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px rgba(0, 0, 0, .15);
-  -moz-box-shadow: 1px 0 #333, 0 2px 0 #555, 0 3px 0 #555, 0 4px 0 #666, 0 5px 0 #777, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px rgba(0, 0, 0, .15);
-  -ms-box-shadow: 1px 0 #333, 0 2px 0 #555, 0 3px 0 #555, 0 4px 0 #666, 0 5px 0 #777, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px rgba(0, 0, 0, .15);
-}
-.blackActive{
-  box-shadow: 1px 0 #777, 0 2px 0 #777, 0 3px 0 #666, 0 4px 0 #555;
-  -webkit-box-shadow: 1px 0 #555, 0 1px 0 #555, 0 1px 0 #444, 0 2px 0 #333;
-  -moz-box-shadow: 1px 0 #111, 0 2px 0 #222, 0 3px 0 #222;
-  -ms-box-shadow: 1px 0 #111, 0 2px 0 #222, 0 3px 0 #222;
+  &.active {
+  	box-shadow: 1px 0 #777, 0 2px 0 #777, 0 3px 0 #666, 0 4px 0 #555;
+  }
 }

@@ -51,48 +51,7 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <div id="piano">
-                    <div id="piano-container">
-                      <li>                
-                        <div class="white" ng-class="{whiteActive: keyboard.activeKeys.indexOf(90) > -1}">                        
-                        </div>
-                        <div class="black">
-                        </div>    
-                      </li> 
-                      <li>                
-                        <div class="white">                         
-                        </div>
-                        <div class="black">
-                        </div>   
-                      </li> 
-                      <li>                
-                        <div class="white">                            
-                        </div>
-                      </li> 
-                      <li>                
-                        <div class="white">                      
-                        </div>
-                        <div class="black">
-                        </div>      
-                      </li> 
-                      <li>                
-                        <div class="white">                            
-                        </div>
-                        <div class="black">
-                        </div>
-                      </li> 
-                      <li>                
-                        <div class="white">                        
-                        </div>
-                        <div class="black">
-                        </div>    
-                      </li> 
-                      <li>                
-                        <div class="white">                          
-                        </div>
-                      </li>                     
-                    </div>
-                  </div>
+                  <div ng-include="'views/keyboard.html'"></div>
                 </div>
               </div>
             </div>
