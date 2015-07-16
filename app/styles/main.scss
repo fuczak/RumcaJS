@@ -1,7 +1,7 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 //Variables
-$brand-primary: #7C9CAE;
+$brand-primary: #73937E;//9B287B, 7C9CAE
 $brand-success: #40090D;
 $brand-info: #5E001E;
 $brand-warning: #87BBA2;
@@ -31,6 +31,7 @@ hr {
   border-width: 3px 1px 1px 1px;
   border-color: rgba(255, 255, 255, 0.15);
   box-shadow: -1px 10px 5px 5px rgba(0, 0, 0, 0.3) inset;
+  min-height: 280px;
 }
 .panel-default > .panel-heading {
   background-color: $brand-success;
@@ -94,27 +95,27 @@ hr {
 }
 //Buttons
 .btn, .btn:focus {
-    position: relative;
-    top: -2px;
-    border: 0;
-    -moz-outline-style: none;
-         outline: medium none;
-     transition: all 0.04s linear;
-     margin-top: 10px;
-     margin-bottom: 10px;
-     margin-left: 2px;
-     margin-right: 2px;
+  position: relative;
+  top: -2px;
+  border: 0;
+  -moz-outline-style: none;
+       outline: medium none;
+   transition: all 0.04s linear;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 2px;
+   margin-right: 2px;
 }
 .btn:active, .btn.active {
-    top: 2px;
+  top: 2px;
 }
 .btn.btn-primary {
-    box-shadow: 0 0 0 1px darken($brand-primary, 5%) inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 4px 0 0 darken($brand-primary, 2%), 0 8px 8px 1px rgba(0,0,0,0.5);
-    background-color: $brand-primary;
+  box-shadow: 0 0 0 1px darken($brand-primary, 5%) inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 4px 0 0 darken($brand-primary, 2%), 0 8px 8px 1px rgba(0,0,0,0.5);
+  background-color: $brand-primary;
 }
 .btn.btn-primary:active, .btn.btn-primary.active {
-    box-shadow:0 0 0 1px darken($brand-primary, 5%) inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
-    background-color: darken($brand-primary, 10%);
+  box-shadow:0 0 0 1px darken($brand-primary, 5%) inset, 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+  background-color: darken($brand-primary, 10%);
 }
 //Range Slider - Autoprefixer wont work here. Inspired by http://codepen.io/thebabydino/pen/RNYrJM
 input[type='range'] {
