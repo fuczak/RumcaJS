@@ -110,13 +110,28 @@ angular.module('rumca-js')
 
     var oscMix = 50;
 
-    // function updateVoices(fn, value) {
-    //     voices.forEach(function (voice) {
-    //       fn.call(voice, value);
-    //     });
-    // };
 
-    return {
+    function updateVoices(fn) {
+      return function(value) {
+        voices.forEach(function (voice) {
+          if (voice) {
+            voice[fn](value);
+          }
+        });
+      }
+    };
+
+    var createFunction = function(obj, fn) {
+      obj.fn = updateVoices(fn);
+      return obj;
+    };
+
+    var fns = [ 'setOsc1Type', 'setOsc1Octave', 'setOsc2Type', 'setOsc2Octave',
+      'setOsc1Detune', 'setOsc2Detune', 'setOscMix', 'setFilterType',
+      'setFilterCutoff', 'setFilterQ', 'setFilterLFOFreq', 'setFilterLFOGain' ]
+      .reduce(createFunction, {});
+
+    return angular.extends(fns, {
     	ctx: ctx,
       osc1: osc1,
       osc2: osc2,
@@ -140,91 +155,7 @@ angular.module('rumca-js')
     			voices[keyCode].noteOff(this);
     			voices[keyCode] = null;
     		}
-    	},
-      setOsc1Type: function (value) {
-        voices.forEach(function (voice) {
-          if (voice) {
-            voice.setOsc1Type(value);
-          }
-        });
-        // updateVoices(setOsc1Type, value);
-      },
-      setOsc1Octave: function (value) {
-        voices.forEach(function (voice) {
-          if (voice) {
-            voice.setOsc1Octave(value);
-          }
-        });
-      },
-      setOsc2Type: function (value) {
-        voices.forEach(function (voice) {
-          if (voice) {
-            voice.setOsc2Type(value);
-          }
-        });
-      },
-      setOsc2Octave: function (value) {
-        voices.forEach(function (voice) {
-          if (voice) {
-            voice.setOsc2Octave(value);
-          }
-        });
-      },
-      setOsc1Detune: function (value) {
-        voices.forEach(function (voice) {
-          if (voice) {
-            voice.setOsc1Detune(value);
-          }
-        });
-      },
-      setOsc2Detune: function (value) {
-        voices.forEach(function (voice) {
-          if (voice) {
-            voice.setOsc2Detune(value);
-          }
-        });
-      },
-      setOscMix: function (value) {
-        voices.forEach(function (voice) {
-          if (voice) {
-            voice.setOscMix(value);
-          }
-        });
-      },
-      setFilterType: function (value) {
-        voices.forEach(function (voice) {
-          if (voice) {
-            voice.setFilterType(value);
-          }
-        });
-      },
-      setFilterCutoff: function (value) {
-        voices.forEach(function (voice) {
-          if (voice) {
-            voice.setFilterFreq(value);
-          }
-        });
-      },
-      setFilterQ: function (value) {
-        voices.forEach(function (voice) {
-          if (voice) {
-            voice.setFilterQ(value);
-          }
-        });
-      },
-      setFilterLFOFreq: function (value) {
-        voices.forEach(function (voice) {
-          if (voice) {
-            voice.setFilterLFOFreq(value);
-          }
-        });
-      },
-      setFilterLFOGain: function (value) {
-        voices.forEach(function (voice) {
-          if (voice) {
-            voice.setFilterLFOGain(value);
-          }
-        });
-      }
-    };
+    	}
+    });
+
   });
