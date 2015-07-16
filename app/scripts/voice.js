@@ -13,7 +13,7 @@ angular.module('rumca-js')
       this.volEnv.gain.setValueAtTime(0, now);
       this.volEnv.gain.linearRampToValueAtTime(1, now + Number(dsp.volEnv.attack));
       this.volEnv.gain.setTargetAtTime(Number(dsp.volEnv.sustain), now + Number(dsp.volEnv.attack), Number(dsp.volEnv.decay) + 0.001);
-      this.volEnv.connect(dsp.master);
+      this.volEnv.connect(dsp.voiceChain);
 
       //Filter
       this.filter = dsp.ctx.createBiquadFilter();

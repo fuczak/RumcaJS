@@ -7,15 +7,16 @@ angular.module('rumca-js')
   	var voices = [];
 
     //Master Effect Chain
+    //Master volume
     var master = ctx.createGain();
-    master.gain.value = 0.01;
-    //master.connect(ctx.destination);
+    master.connect(ctx.destination);
+    master.gain.value = 0.05;
 
     //Distortion
     var distortion = ctx.createWaveShaper();
-    master.connect(distortion);
-    distortion.connect(ctx.destination);
+    distortion.connect(master);
 
+    //Curve code: http://stackoverflow.com/questions/22312841/waveshaper-node-in-webaudio-how-to-emulate-distortion
     distortion.makeDistCurve = function(amount) {
       var k = typeof amount === 'number' ? amount : 50,
           n_samples = 44100,
@@ -31,11 +32,24 @@ angular.module('rumca-js')
     };
 
     distortion.updateCurve = function (value) {
-      distortion.curve = distortion.makeDistCurve(Number(value));
+      //Do not route through the distortion node if amount is set to 0
+      if (value === 0) {
+        voiceChain.connect(master);
+      } else {
+        voiceChain.connect(distortion);
+        distortion.curve = distortion.makeDistCurve(Number(value));
+      }
     };
+
     distortion.amount = 0;
-    distortion.curve = distortion.makeDistCurve(distortion.amount);
     distortion.oversample = '4x';
+
+    //Voice Chain Volume
+    var voiceChain = ctx.createGain();
+    voiceChain.gain.value = 0.8;
+    voiceChain.connect(distortion);
+    //Needs to be called after defining voiceChain node
+    distortion.updateCurve(distortion.amount);
 
     //Init Patch
     //Volume Envelope
@@ -112,6 +126,7 @@ angular.module('rumca-js')
       filterLFO: filterLFO,
       filterLFOGain: filterLFOGain,
       filterEnv: filterEnv,
+      voiceChain: voiceChain,
       master: master,
       distortion: distortion,
     	noteOn: function(note, keyCode) {
