@@ -124,5 +124,6 @@ angular.module('rumca-js')
     Voice.prototype.setFilterLFOGain = function (value) {
       this.filterLFOGain.gain.value = value;
     };
+    
     return Voice;
   });

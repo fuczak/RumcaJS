@@ -2,7 +2,12 @@
 
 angular.module('rumca-js')
   .controller('GUI', function ($scope, $document, Keyboard, DSP) {
-    
+
+    //Reference Keyboard object in synth gui
+    $scope.keyboard = Keyboard;
+    //Reference DSP object in synth gui
+    $scope.dsp = DSP;
+
     //Register keyboard event handlers
     $document.bind('keydown', function (e) {
       //Prevent invoking function multiple times when key is being hold down
@@ -18,11 +23,6 @@ angular.module('rumca-js')
         Keyboard.keyup(e.keyCode);
       });
     });
-
-    //Reference Keyboard object in synth gui
-    $scope.keyboard = Keyboard;
-    //Reference DSP object in synth gui
-    $scope.dsp = DSP;
 
     //Register watchers for not-straightforward connections between DSP and gui controls
     $scope.$watch('dsp.osc1.type', function (value) {
@@ -58,7 +58,7 @@ angular.module('rumca-js')
     });
 
     $scope.$watch('dsp.filter.cutoff', function (value) {
-      DSP.setFilterCutoff(value);
+      DSP.setFilterFreq(value);
     });
 
     $scope.$watch('dsp.filter.Q.value', function (value) {

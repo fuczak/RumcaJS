@@ -2,7 +2,10 @@
 
 angular.module('rumca-js')
   .factory('Keyboard', function(DSP) {
-    var keys = new Array( 256 );
+
+    var keys = new Array(256);    
+    var activeKeys = [];
+
     //Keycodes to notes table
     //Lower row
     keys[90] = 31; // C2
@@ -43,8 +46,6 @@ angular.module('rumca-js')
     keys[189] = 65;
     keys[219] = 66;
     keys[187] = 67;
-
-    var activeKeys = [];
 
     return {
         activeKeys: activeKeys,
