@@ -19,6 +19,15 @@ body {
 hr {
   box-shadow: 0 2px 5px 5px rgba(0, 0, 0, 0.3);
 }
+.letter-white {
+  position: relative;
+  top: 120px;
+}
+.letter-black {
+  position: relative;
+  top: 40px;
+  color: #fff;
+}
 .logo {
   color: #fff;
 }
