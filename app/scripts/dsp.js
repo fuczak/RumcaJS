@@ -2,18 +2,22 @@
 
 angular.module('rumca-js')
   .factory('DSP', function ($window, Voice) {
-
-  	var ctx = new $window.AudioContext();
+    
+    var AudioContext = $window.AudioContext || $window.webkitAudioContext;
+  	var ctx = new AudioContext();
   	var voices = [];
+    var master = ctx.createGain();
+    var distortion = ctx.createWaveShaper();
+    var voiceChain = ctx.createGain();
 
     //Master Effect Chain
     //Master volume
-    var master = ctx.createGain();
+    // var master = ctx.createGain();
     master.connect(ctx.destination);
     master.gain.value = 0.05;
 
     //Distortion
-    var distortion = ctx.createWaveShaper();
+    //var distortion = ctx.createWaveShaper();
     distortion.connect(master);
 
     //Curve code: http://stackoverflow.com/questions/22312841/waveshaper-node-in-webaudio-how-to-emulate-distortion
@@ -45,7 +49,7 @@ angular.module('rumca-js')
     distortion.oversample = '4x';
 
     //Voice Chain Volume
-    var voiceChain = ctx.createGain();
+    // var voiceChain = ctx.createGain();
     voiceChain.gain.value = 0.8;
     voiceChain.connect(distortion);
     //Needs to be called after defining voiceChain node
@@ -112,7 +116,7 @@ angular.module('rumca-js')
 
     function updateVoices(fn, value) {
       voices.forEach(function (voice) {
-        if (voice) {            
+        if (voice) {
           voice[fn](value);
         }
       });
