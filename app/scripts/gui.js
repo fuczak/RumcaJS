@@ -25,56 +25,18 @@ angular.module('rumca-js')
     });
 
     //Register watchers for not-straightforward connections between DSP and gui controls
-    $scope.$watch('dsp.osc1.type', function (value) {
-      DSP.setOsc1Type(value);
-    });
-
-    $scope.$watch('dsp.osc2.type', function (value) {
-      DSP.setOsc2Type(value);
-    });
-
-    $scope.$watch('dsp.osc1.octave', function (value) {
-      DSP.setOsc1Octave(value);
-    });
-
-    $scope.$watch('dsp.osc2.octave', function (value) {
-      DSP.setOsc2Octave(value);
-    });
-
-    $scope.$watch('dsp.osc1.detune.value', function (value) {
-      DSP.setOsc1Detune(value);
-    });
-
-    $scope.$watch('dsp.osc2.detune.value', function (value) {
-      DSP.setOsc2Detune(value);
-    });
-
-    $scope.$watch('dsp.oscMix', function (value) {
-      DSP.setOscMix(value);
-    });
-
-    $scope.$watch('dsp.filter.type', function (value) {
-      DSP.setFilterType(value);
-    });
-
-    $scope.$watch('dsp.filter.cutoff', function (value) {
-      DSP.setFilterFreq(value);
-    });
-
-    $scope.$watch('dsp.filter.Q.value', function (value) {
-      DSP.setFilterQ(value);
-    });
-
-    $scope.$watch('dsp.filterLFO.frequency.value', function (value) {
-      DSP.setFilterLFOFreq(value);
-    });
-
-    $scope.$watch('dsp.filterLFOGain.gain.value', function (value) {
-      DSP.setFilterLFOGain(value);
-    });
-
-    $scope.$watch('dsp.distortion.amount', function (value) {
-      DSP.distortion.updateCurve(value);
-    });
-
+    //New value automatically becomes callback argument
+    $scope.$watch('dsp.osc1.type', DSP.setOsc1Type);
+    $scope.$watch('dsp.osc2.type', DSP.setOsc2Type);
+    $scope.$watch('dsp.osc1.octave', DSP.setOsc1Octave);
+    $scope.$watch('dsp.osc2.octave', DSP.setOsc2Octave);
+    $scope.$watch('dsp.osc1.detune.value', DSP.setOsc1Detune);
+    $scope.$watch('dsp.osc2.detune.value', DSP.setOsc2Detune);
+    $scope.$watch('dsp.oscMix', DSP.setOscMix);
+    $scope.$watch('dsp.filter.type', DSP.setFilterType);
+    $scope.$watch('dsp.filter.cutoff', DSP.setFilterFreq);
+    $scope.$watch('dsp.filter.Q.value', DSP.setFilterQ);
+    $scope.$watch('dsp.filterLFO.frequency.value', DSP.setFilterLFOFreq);
+    $scope.$watch('dsp.filterLFOGain.gain.value', DSP.setFilterLFOGain);
+    $scope.$watch('dsp.distortion.amount', DSP.distortion.updateCurve);
   });
