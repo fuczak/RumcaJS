@@ -1,20 +1,22 @@
 'use strict';
 
 angular.module('rumca-js')
-  .factory('DSP', function ($window, Voice) {
-    
-    var AudioContext = $window.AudioContext || $window.webkitAudioContext;
-  	var ctx = new AudioContext();
+  .factory('DSP', function ($window, Voice, Ctx, Tuna, Delay) {
+
+    var ctx = Ctx;
   	var voices = [];
     var master = ctx.createGain();
     var distortion = ctx.createWaveShaper();
     var voiceChain = ctx.createGain();
+    var delay = Delay;
+    delay.delayTime = 100;
 
     //Master Effect Chain
     //Master volume
     // var master = ctx.createGain();
-    master.connect(ctx.destination);
-    master.gain.value = 0.05;
+    master.connect(delay);
+    delay.connect(ctx.destination);
+    master.gain.value = 0.15;
 
     //Distortion
     //var distortion = ctx.createWaveShaper();
