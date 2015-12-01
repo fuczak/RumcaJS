@@ -9,13 +9,12 @@ angular.module('rumca-js')
     var distortion = ctx.createWaveShaper();
     var voiceChain = ctx.createGain();
     var delay = Delay;
-    delay.delayTime = 100;
 
     //Master Effect Chain
     //Master volume
-    // var master = ctx.createGain();
     master.connect(delay);
     delay.connect(ctx.destination);
+    delay.delayTime = 10;
     master.gain.value = 0.15;
 
     //Distortion
@@ -137,6 +136,7 @@ angular.module('rumca-js')
       voiceChain: voiceChain,
       master: master,
       distortion: distortion,
+      delay: delay,
     	noteOn: function(note, keyCode) {
     		if (!voices[keyCode]) {
     			//Create new voice and store it in voices array

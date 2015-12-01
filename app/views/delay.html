@@ -1,0 +1,23 @@
+<div class="panel panel-default well well-sm">
+  <div class="panel-heading" data-toggle="collapse" data-target="#delay">
+    <h3 class="panel-title">Delay</h3>
+  </div>
+  <div class="panel-body collapse" id="delay">
+    <div class="row">
+      <div class="col-md-6">
+        <label>Feedback</label>
+        <input type="range" ng-model="dsp.delay.feedback.value" min="0" max="0.80" step="0.1">
+        <label>Cutoff</label>
+        <input type="range" ng-model="dsp.delay.cutoff.value" min="0" max="22050" step="100">
+      </div>
+      <div class="col-md-6">
+        <label>Wet Level</label>
+        <input type="range" ng-model="dsp.delay.wetLevel.value" min="0" max="1" step="0.1">
+        <label>Dry Level</label>
+        <input type="range" ng-model="dsp.delay.dryLevel.value" min="0" max="1" step="0.1">
+      </div>
+    </div>
+    <label>Time</label>
+    <input type="range" ng-model="dsp.delay.delayTime.value" min="0" max="2000" step="10">
+  </div>
+</div>
