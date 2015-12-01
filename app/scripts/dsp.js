@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('rumca-js')
-  .factory('DSP', function ($window, Voice, Ctx, Tuna, Delay) {
+  .factory('DSP', function ($window, Voice, Ctx, Tuna, Delay, Chorus) {
 
     var ctx = Ctx;
   	var voices = [];
@@ -9,13 +9,14 @@ angular.module('rumca-js')
     var distortion = ctx.createWaveShaper();
     var voiceChain = ctx.createGain();
     var delay = Delay;
+    var chorus = Chorus;
 
     //Master Effect Chain
     //Master volume
-    master.connect(delay);
+    master.connect(chorus);
+    chorus.connect(delay);
     delay.connect(ctx.destination);
-    delay.delayTime = 10;
-    master.gain.value = 0.15;
+    master.gain.value = 0.5;
 
     //Distortion
     //var distortion = ctx.createWaveShaper();
@@ -137,6 +138,7 @@ angular.module('rumca-js')
       master: master,
       distortion: distortion,
       delay: delay,
+      chorus: chorus,
     	noteOn: function(note, keyCode) {
     		if (!voices[keyCode]) {
     			//Create new voice and store it in voices array
