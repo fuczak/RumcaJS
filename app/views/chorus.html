@@ -1,12 +1,17 @@
 <div class="panel panel-default well well-sm">
-  <div class="panel-heading" data-toggle="collapse" data-target="#chorus">
-    <h3 class="panel-title">Chorus</h3>
-  </div>
+  <div class="panel-heading">
+    <h3 class="panel-title"><span data-toggle="collapse" data-target="#chorus"><button class="btn tuna-panel-toggle btn-xs btn-info"><i class="glyphicon glyphicon-sort"></i></button></span> Chorus
+      <button class="btn btn-primary btn-xs active tuna-btn pull-right" ng-model="dsp.chorus.bypass" ng-click="dsp.chorus.bypass = !dsp.chorus.bypass" data-toggle="button">
+        <i class="glyphicon glyphicon-volume-up" ng-hide="dsp.chorus.bypass"></i>
+        <i class="glyphicon glyphicon-volume-off" ng-hide="!dsp.chorus.bypass"></i>
+      </button>
+    </h3>
+  </div>  
   <div class="panel-body collapse" id="chorus">
     <div class="row">
       <div class="col-md-6">
         <label>Feedback</label>
-        <input type="range" ng-model="dsp.chorus.feedback" min="0" max="1" step="0.1">        
+        <input type="range" ng-model="dsp.chorus.feedback" min="0" max="1" step="0.1">
       </div>
       <div class="col-md-6">
         <label>Rate</label>
